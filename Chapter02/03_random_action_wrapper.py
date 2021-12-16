@@ -2,15 +2,15 @@ import gym
 from typing import TypeVar
 import random
 
-Action = TypeVar('Action')
+#Action = TypeVar('Action')
 
 
 class RandomActionWrapper(gym.ActionWrapper):
     def __init__(self, env, epsilon=0.1):
-        super(RandomActionWrapper, self).__init__(env)
+        super(RandomActionWrapper, self).__init__(env) # allow us to call the __init__ from the mother class! (otherwise, we would only run the init method)
         self.epsilon = epsilon
 
-    def action(self, action: Action) -> Action:
+    def action(self, action):
         if random.random() < self.epsilon:
             print("Random!")
             return self.env.action_space.sample()
